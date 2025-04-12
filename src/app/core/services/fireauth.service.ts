@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
-import { Observable, from } from 'rxjs';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  User,
+  getAuth, authState
+} from '@angular/fire/auth';
+import {Observable, from, take} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth,
+              private router: Router,) {}
 
   /**
    * Registriert einen neuen Benutzer mit E-Mail und Passwort.
@@ -32,7 +42,9 @@ export class FireauthService {
    * @returns Observable mit `void`, wenn das Abmelden erfolgreich war.
    */
   signOut(): Observable<void> {
-    return from(signOut(this.auth));
+    this.router.navigate(['/']);
+    return from(signOut(this.auth).then(() => window.location.reload()));
+
     // Gibt ein Observable mit `void` zurück (kein Wert, nur Erfolg oder Fehler)
   }
 
@@ -44,10 +56,6 @@ export class FireauthService {
    * - `null`, falls kein Benutzer angemeldet ist.
    */
   getAuthState(): Observable<User | null> {
-    return new Observable<User | null>((observer) => {
-      onAuthStateChanged(this.auth, (user) => {
-        observer.next(user); // Gibt den aktuellen Benutzer oder `null` zurück
-      });
-    });
+    return authState(this.auth).pipe(take(1)); // nimmt nur den ersten Wert und schließt ab
   }
 }

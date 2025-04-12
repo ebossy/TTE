@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 import {FireauthService} from '../../core/services/fireauth.service';
+import {take} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +50,7 @@ export class LoginComponent {
   }
 
   test(){
-    console.log('works!');
+    console.log(this.fireauth.getAuthState())
   }
 
   navigateTo(page:string){
