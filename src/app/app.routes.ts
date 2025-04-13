@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import {LoginComponent} from './pages/login/login.component';
-import {RegisterComponent} from './pages/register/register.component';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
-import {TodoComponent} from './pages/todo/todo.component';
+import {LoginComponent} from './features/auth/pages/login/login.component';
+import {RegisterComponent} from './features/auth/pages/register/register.component';
+import {DashboardComponent} from './core/pages/dashboard/dashboard.component';
+import {TodoComponent} from './features/todo/pages/todo/todo.component';
 import {EventComponent} from './pages/event/event.component';
 import {ProjectComponent} from './pages/project/project.component';
-import {AuthGuardService} from './core/guards/auth-guard.service';
+import {AuthGuardService} from './features/auth/guards/auth-guard.service';
 
 
 export const routes: Routes = [

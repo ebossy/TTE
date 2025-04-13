@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="flex-1">Browser</span>
+  <button mat-button [matMenuTriggerFor]="userMenu">
+    {{ currentUser.name }}
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="test()">Profil</button>
+    <button mat-menu-item (click)="signOut()">Abmelden</button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav" opened="false">
+    <!-- Menüeinträge oder Navigation -->
+    <p (click)="navigateTo('dashboard')">Dashboard</p>
+    <p (click)="navigateTo('todo')">ToDos</p>
+    <p (click)="navigateTo('project')">Projects</p>
+    <p (click)="navigateTo('event')">Events</p>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content> <!-- HIER kommt dein Page-Content rein -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

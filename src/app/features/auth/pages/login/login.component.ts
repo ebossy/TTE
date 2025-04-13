@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatButton} from '@angular/material/button';
-import {FireauthService} from '../../core/services/fireauth.service';
+import {FireauthService} from '../../services/fireauth.service';
 import {take} from 'rxjs';
 
 @Component({
@@ -19,9 +19,10 @@ import {take} from 'rxjs';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  private fireauth = inject(FireauthService);
+
   constructor(
     private router: Router,
-    private fireauth: FireauthService,
   ) {}
   public email:any;
   public password:any;

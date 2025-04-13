@@ -1,0 +1,49 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.username {
+  padding-right: 16px;
+  font-weight: bold;
+}
+
+.dashboard-section {
+  padding: 16px;
+}
+
+.sidenav {
+  border: 1px solid black;     /* schwarzer Rahmen */
+
+  padding: 16px;               /* innerer Abstand */
+  border-radius: 8px;          /* leicht abgerundete Ecken (optional) */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* leichtes Schatten für Tiefe */
+  margin: 16px 16px 16px 1px; /* äußerer Abstand (optional, für Luft) */
+  background-color: white;     /* sorgt für Kontrast bei dunklem Theme */
+}
+
+.sidenav {
+  width: 200px;                /* fixe Breite für die Navigation */
+  padding: 8px;                /* innerer Abstand im Sidenav */
+  background-color: #f5f5f5;   /* hellgrauer Hintergrund */
+  border-right: 1px solid #ccc; /* Linie zum Content-Bereich */
+}
+
+.sidenav p {
+  margin: 12px 0;
+  padding-bottom: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidenav p:last-child {
+  border-bottom: none; /* Letztes Element ohne Trennlinie */
+}
+
+.sidenav p:hover {
+  color: #1976d2;              /* Hover-Effekt (Material Primary Blue) */
+}

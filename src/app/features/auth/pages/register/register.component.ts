@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {Router} from '@angular/router';
-import {FireauthService} from '../../core/services/fireauth.service';
-import {UserFirestoreService} from '../../core/services/user-firestore.service';
+import {FireauthService} from '../../services/fireauth.service';
+import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 
 @Component({
   selector: 'app-register',
@@ -22,10 +22,10 @@ import {UserFirestoreService} from '../../core/services/user-firestore.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  private fireauth = inject(FireauthService);
+  private userStore = inject(UserFirestoreService);
   constructor(
-    private router:Router,
-    private fireauth: FireauthService,
-    private userStore: UserFirestoreService,
+    private router:Router
 ) {}
   public email:any;
   public password:any;

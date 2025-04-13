@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import {
+  SidenavToolbarLayoutComponent
+} from '../../../../core/components/sidenav-toolbar-layout/sidenav-toolbar-layout.component';
 
 @Component({
   selector: 'app-todo',
-  imports: [],
+  imports: [
+    SidenavToolbarLayoutComponent
+  ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
 })

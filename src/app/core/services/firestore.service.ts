@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { setLogLevel, LogLevel } from "@angular/fire";
 import {
   Firestore,
   collection,
@@ -15,11 +16,15 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FirestoreService {
 
+export class FirestoreService {
   constructor(
     private firestore: Firestore,
-    ) { }
+    ) {
+    setLogLevel(LogLevel.SILENT); //verhindert Unnötiges anzeigen von Warnungen
+  }
+
+
 
   /**
    * Holt alle Dokumente aus einer bestimmten Sammlung
@@ -35,6 +40,13 @@ export class FirestoreService {
   getDocument<T>(collectionName: string, id: string): Observable<T> {
     const docRef = doc(this.firestore, `${collectionName}/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<T>;
+  }
+
+  /**
+   * Holt eine Referenz aus Firestore
+   */
+  getDocRef(collectionName: string, id: string): any{
+    return doc(this.firestore, `${collectionName}/${id}`);
   }
 
 

@@ -6,9 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
   User,
-  getAuth, authState
 } from '@angular/fire/auth';
-import {Observable, from, take} from 'rxjs';
+import {Observable, from} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -17,6 +16,7 @@ import {Router} from '@angular/router';
 export class FireauthService {
   constructor(private auth: Auth,
               private router: Router,) {}
+
 
   /**
    * Registriert einen neuen Benutzer mit E-Mail und Passwort.
@@ -56,6 +56,10 @@ export class FireauthService {
    * - `null`, falls kein Benutzer angemeldet ist.
    */
   getAuthState(): Observable<User | null> {
-    return authState(this.auth).pipe(take(1)); // nimmt nur den ersten Wert und schließt ab
+    return new Observable<User | null>((observer) => {
+      onAuthStateChanged(this.auth, (user) => {
+        observer.next(user); // Gibt den aktuellen Benutzer oder `null` zurück
+      });
+    });
   }
 }

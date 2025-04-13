@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {FireauthService} from '../services/fireauth.service';
 
 import {
@@ -16,8 +16,8 @@ import { map, Observable, of, switchMap, take, tap} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-
-  constructor(private authService: FireauthService, private router: Router) {}
+  private authService =  inject(FireauthService)
+  constructor(private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     return this.authService.getAuthState().pipe(
