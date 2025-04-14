@@ -1,1 +1,15 @@
 <app-sidenav-toolbar-layout>
+  <div class="center">
+    <button mat-button (click)="">
+      <mat-icon>add_box</mat-icon>
+      ToDo Hinzufügen
+    </button>
+  </div>
+
+  <div class="dashboard-section">
+    <app-todo-card
+      *ngFor="let todo of todos"
+      [todo]="todo">
+    </app-todo-card>
+  </div>
+</app-sidenav-toolbar-layout>

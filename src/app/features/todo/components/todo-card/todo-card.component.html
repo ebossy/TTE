@@ -1,0 +1,10 @@
+<mat-card class="item-card">
+  <mat-card-title>{{ todo.title }}</mat-card-title>
+  <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
+  <mat-card-actions>
+    <mat-checkbox
+      [checked]="todo.status"
+      (change)="checkboxChanged()">
+    </mat-checkbox>
+  </mat-card-actions>
+</mat-card>

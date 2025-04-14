@@ -11,7 +11,7 @@ import {AuthGuardService} from './features/auth/guards/auth-guard.service';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
 
