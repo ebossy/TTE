@@ -4,12 +4,15 @@
       <mat-icon>add_box</mat-icon>
       ToDo Hinzufügen
     </button>
-    <button (click) = "test()">tewst</button>
   </div>
-
+  <div class="filter-buttons">
+    <button mat-button [class.active]="filter === 'all'" (click)="setFilter('all')">Alle</button>
+    <button mat-button [class.active]="filter === 'open'" (click)="setFilter('open')">Offen</button>
+    <button mat-button [class.active]="filter === 'done'" (click)="setFilter('done')">Erledigt</button>
+  </div>
   <div class="dashboard-section">
     <app-todo-card
-      *ngFor="let todo of todos$ | async"
+      *ngFor="let todo of filteredTodos"
       [todo]="todo">
     </app-todo-card>
   </div>
