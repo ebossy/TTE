@@ -1,0 +1,66 @@
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {Todo} from '../../models/Todo';
+import {MatButton} from '@angular/material/button';
+import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
+import {TodoFirestoreService} from '../../services/todo-firestore.service';
+import {MatDialogRef} from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-todo-form',
+  imports: [
+    ReactiveFormsModule,
+    MatLabel,
+    MatFormField,
+    MatInput,
+    MatButton,
+  ],
+  templateUrl: './todo-form.component.html',
+  styleUrl: './todo-form.component.css'
+})
+export class TodoFormComponent {
+  todoForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private userFire: UserFirestoreService,
+              private todoFire: TodoFirestoreService,
+              private dialogRef: MatDialogRef<TodoFormComponent>)
+  {
+    this.todoForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['']
+    });
+  }
+
+  onSubmit() {
+    if (this.todoForm.valid) {
+      let userId = "";
+      // Verwende async/await, um sicherzustellen, dass die userId korrekt gesetzt wird
+      this.userFire.getCurrentUser().then(async data => {
+        userId = data.id; // userId wird hier gesetzt, nachdem getCurrentUser() abgeschlossen ist
+
+        // todo attribute bündeln
+        const formValue = this.todoForm.value;
+        let newTodo = {
+          title: formValue.title,
+          description: formValue.description,
+          status: false, // Status immer false bei Erstellung
+          userId: userId,
+        };
+
+        //Todo in die Firebase speichern
+        this.todoFire.addDoc(newTodo);
+
+        // Dialog schließen, nachdem das Todo hinzugefügt wurde
+        this.closeForm()
+
+      }).catch(error => {
+        console.error("Fehler beim Abrufen des Benutzers:", error);
+      });
+    }
+  }
+  closeForm(){
+    this.dialogRef.close();
+  }
+}

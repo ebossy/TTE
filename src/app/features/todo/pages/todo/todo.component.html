@@ -1,14 +1,15 @@
 <app-sidenav-toolbar-layout>
   <div class="center">
-    <button mat-button (click)="">
+    <button mat-button (click)="openTodoDialog()">
       <mat-icon>add_box</mat-icon>
       ToDo Hinzufügen
     </button>
+    <button (click) = "test()">tewst</button>
   </div>
 
   <div class="dashboard-section">
     <app-todo-card
-      *ngFor="let todo of todos"
+      *ngFor="let todo of todos$ | async"
       [todo]="todo">
     </app-todo-card>
   </div>

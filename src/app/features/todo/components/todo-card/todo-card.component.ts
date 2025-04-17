@@ -3,6 +3,9 @@ import {MatCard, MatCardActions, MatCardSubtitle, MatCardTitle} from '@angular/m
 import {MatCheckbox} from '@angular/material/checkbox';
 import {FormsModule} from '@angular/forms';
 import {Todo} from '../../models/Todo';
+import {TodoFirestoreService} from '../../services/todo-firestore.service';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-todo-card',
@@ -12,15 +15,25 @@ import {Todo} from '../../models/Todo';
     MatCardSubtitle,
     MatCardActions,
     MatCheckbox,
-    FormsModule
+    FormsModule,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './todo-card.component.html',
   styleUrl: './todo-card.component.css'
 })
 export class TodoCardComponent {
   @Input() todo!: Todo;
-
+  constructor(
+    private todoFire: TodoFirestoreService,
+  ) {
+  }
   checkboxChanged() {
-
+    this.todo.status = !this.todo.status
+    console.log(this.todo.status)
+    this.todoFire.updateDoc(this.todo)
+  }
+  delete(){
+    this.todoFire.deleteDoc(this.todo)
   }
 }

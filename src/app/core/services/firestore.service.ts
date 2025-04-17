@@ -9,7 +9,7 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-  setDoc
+  setDoc, query, where
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -34,6 +34,11 @@ export class FirestoreService {
     return collectionData(colRef, { idField: 'id' }) as Observable<T[]>;
   }
 
+  getCollectionEqualsFilter<T>(collectionName: string, colletionField: string, filterData:string): Observable<T[]> {
+    const colRef = collection(this.firestore, collectionName);
+    const q = query(colRef, where(colletionField, "==", filterData));
+    return collectionData(q, { idField: 'id' }) as Observable<T[]>;
+  }
   /**
    * Holt ein einzelnes Dokument aus Firestore
    */
@@ -41,6 +46,11 @@ export class FirestoreService {
     const docRef = doc(this.firestore, `${collectionName}/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<T>;
   }
+
+
+
+
+
 
   /**
    * Holt eine Referenz aus Firestore

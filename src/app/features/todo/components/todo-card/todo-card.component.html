@@ -1,6 +1,11 @@
 <mat-card class="item-card">
+  <button mat-icon-button class="close-button" (click)="delete()">
+    <mat-icon>close</mat-icon>
+  </button>
+
   <mat-card-title>{{ todo.title }}</mat-card-title>
   <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle>
+
   <mat-card-actions>
     <mat-checkbox
       [checked]="todo.status"
