@@ -12,3 +12,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-self: center;
   align-self: center;
 }
+
+.item-card {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  position: relative;
+}

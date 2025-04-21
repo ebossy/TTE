@@ -1,0 +1,19 @@
+<app-sidenav-toolbar-layout>
+  <div class="center">
+    <button mat-button (click)="openEventDialog()">
+      <mat-icon>add_box</mat-icon>
+      Event erstellen
+    </button>
+  </div>
+  <div class="filter-buttons">
+    <button mat-button [class.active]="filter === 'all'" (click)="setFilter('all')">Alle Events</button>
+    <button mat-button [class.active]="filter === 'my'" (click)="setFilter('my')">Meine Events</button>
+    <button mat-button [class.active]="filter === 'other'" (click)="setFilter('other')">Andere Events</button>
+  </div>
+  <div class="dashboard-section">
+    <app-event-card
+      *ngFor="let eventTTE of filteredEventTTE"
+      [eventTTE]="eventTTE">
+    </app-event-card>
+  </div>
+</app-sidenav-toolbar-layout>

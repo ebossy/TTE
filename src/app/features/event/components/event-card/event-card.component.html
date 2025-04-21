@@ -1,0 +1,21 @@
+<mat-card class="item-card">
+  <mat-card-title>{{ eventTTE.title }}</mat-card-title>
+  <mat-card-subtitle>{{ eventTTE.date.toDate().toLocaleString() }}</mat-card-subtitle>
+  <mat-card-footer>{{eventTTE.member.length}}</mat-card-footer>
+
+  <!-- Menü nur für den Ersteller sichtbar -->
+  <ng-container *ngIf="isOwner">
+    <button class="topr-button" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="test()">Bearbeiten</button>
+      <button mat-menu-item (click)="delete()">Löschen</button>
+    </mat-menu>
+  </ng-container>
+  <ng-container *ngIf="!isOwner">
+    <button mat-icon-button class="topr-button" (click)="leave()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </ng-container>
+</mat-card>

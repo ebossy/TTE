@@ -49,7 +49,6 @@ export class TodoFormComponent {
           userId: userId,
         };
 
-        //Todo in die Firebase speichern
         this.todoFire.addDoc(newTodo);
 
         // Dialog schließen, nachdem das Todo hinzugefügt wurde

@@ -3,7 +3,7 @@ import {LoginComponent} from './features/auth/pages/login/login.component';
 import {RegisterComponent} from './features/auth/pages/register/register.component';
 import {DashboardComponent} from './core/pages/dashboard/dashboard.component';
 import {TodoComponent} from './features/todo/pages/todo/todo.component';
-import {EventComponent} from './pages/event/event.component';
+import {EventComponent} from './features/event/pages/event/event.component';
 import {ProjectComponent} from './pages/project/project.component';
 import {AuthGuardService} from './features/auth/guards/auth-guard.service';
 

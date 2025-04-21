@@ -47,10 +47,6 @@ export class TodoComponent implements OnInit{
   }
 
 
-  test() {
-    console.log(this.todoFire.getUserTodos());
-  }
-
   constructor(
     private dialog: MatDialog,
     private todoFire: TodoFirestoreService) {}

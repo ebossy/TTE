@@ -9,9 +9,10 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-  setDoc, query, where
+  setDoc, query, where, WhereFilterOp
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +35,12 @@ export class FirestoreService {
     return collectionData(colRef, { idField: 'id' }) as Observable<T[]>;
   }
 
-  getCollectionEqualsFilter<T>(collectionName: string, colletionField: string, filterData:string): Observable<T[]> {
+  getCollectionFilter<T>(collectionName: string, colletionField: string, filterType:WhereFilterOp, filterData:string): Observable<T[]> {
     const colRef = collection(this.firestore, collectionName);
-    const q = query(colRef, where(colletionField, "==", filterData));
+    const q = query(colRef, where(colletionField, filterType, filterData));
     return collectionData(q, { idField: 'id' }) as Observable<T[]>;
   }
+
   /**
    * Holt ein einzelnes Dokument aus Firestore
    */
