@@ -1,0 +1,12 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Titel</mat-label>
+    <input matInput formControlName="title" required />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!projectForm.valid">
+    Erstellen
+  </button>
+  <button mat-button (click)="closeForm()">Abbrechen</button>
+</form>

@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {FirestoreService} from './firestore.service';
-import {user, User} from '@angular/fire/auth';
-import {firstValueFrom, Observable, take} from 'rxjs';
-import {doc, getDoc, setDoc} from '@angular/fire/firestore';
+import {User} from '@angular/fire/auth';
+import {firstValueFrom, take} from 'rxjs';
+import {getDoc} from '@angular/fire/firestore';
 import {FireauthService} from '../../features/auth/services/fireauth.service';
 
 @Injectable({
@@ -36,9 +36,7 @@ export class UserFirestoreService {
 
   getCurrentUserID(): any {
     return this.getCurrentUser().then(data => {
-      const userId =  data.id;
-      console.log(userId);
-      return userId;
+      return data.id;
     }).catch(error => {
       console.log(error);
     });

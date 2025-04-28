@@ -4,8 +4,10 @@ import {RegisterComponent} from './features/auth/pages/register/register.compone
 import {DashboardComponent} from './core/pages/dashboard/dashboard.component';
 import {TodoComponent} from './features/todo/pages/todo/todo.component';
 import {EventComponent} from './features/event/pages/event/event.component';
-import {ProjectComponent} from './pages/project/project.component';
+import {ProjectComponent} from './features/project/pages/project/project.component';
 import {AuthGuardService} from './features/auth/guards/auth-guard.service';
+import {ProjectDetailComponent} from './features/project/pages/project-detail/project-detail.component';
+import {ProjectAccessGuard} from './features/project/guards/project-access.guard';
 
 
 export const routes: Routes = [
@@ -15,10 +17,17 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
 
+
+
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "dashboard", component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: "todo", component: TodoComponent, canActivate: [AuthGuardService]},
   {path: "event", component: EventComponent, canActivate: [AuthGuardService]},
-  {path: "project", component: ProjectComponent, canActivate: [AuthGuardService]},
+  {path: "project", component: ProjectComponent, canActivate: [AuthGuardService],},
+  {path:"project/:id", component: ProjectDetailComponent, canActivate: [ProjectAccessGuard]}, //Anderen Guard machen
+
+  {path: '**',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',},
 ];

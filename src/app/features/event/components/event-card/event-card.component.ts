@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EventTTE} from '../../models/EventTTE';
 import {EventFirestoreService} from '../../services/event-firestore.service';
 import {MatCard, MatCardActions, MatCardFooter, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
@@ -25,7 +25,7 @@ import {NgIf} from '@angular/common';
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css'
 })
-export class EventCardComponent {
+export class EventCardComponent implements OnInit {
   @Input() eventTTE!: EventTTE;
   isOwner: boolean = false;
   constructor(

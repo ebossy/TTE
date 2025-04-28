@@ -1,12 +1,11 @@
 import { Timestamp } from 'firebase/firestore';
-import {UserFB} from '../../auth/models/UserFB';
 
 export class EventTTE{
   id: string;
   title: string;
   date: Timestamp;
   creatorId: string;
-  member: UserFB[];
+  member: string[];
 
   constructor(data: Partial<EventTTE> = {}){
     this.id = data.id || "";

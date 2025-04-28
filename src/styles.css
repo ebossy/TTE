@@ -19,3 +19,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 12px;
   position: relative;
 }
+
+.dashboard-section {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3 gleich breite Spalten */
+  gap: 16px;
+  padding: 16px;
+}
