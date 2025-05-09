@@ -10,7 +10,7 @@
     <button mat-button [class.active]="filter === 'my'" (click)="setFilter('my')">Meine Events</button>
     <button mat-button [class.active]="filter === 'other'" (click)="setFilter('other')">Andere Events</button>
   </div>
-  <div class="dashboard-section">
+  <div class="card-section">
     <app-event-card
       *ngFor="let eventTTE of filteredEventTTE"
       [eventTTE]="eventTTE">

@@ -29,10 +29,10 @@ import {UserFirestoreService} from '../../services/user-firestore.service';
 export class SidenavToolbarLayoutComponent implements OnInit {
   // AuthService und UserFirestoreService per inject() einfügen
   private fireauth = inject(FireauthService);
-  private userFire = inject(UserFirestoreService);
 
   constructor(
     private router: Router,
+    private userFire: UserFirestoreService,
   ) {}
 
   currentUser: UserFB = new UserFB();

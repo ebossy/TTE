@@ -11,7 +11,7 @@
   font-weight: bold;
 }
 
-.dashboard-section {
+.card-section {
   padding: 16px;
 }
 
@@ -28,4 +28,8 @@
 
 .clickable:hover {
   color: blue;
+}
+
+.dashboard-section{
+  margin: 8px
 }

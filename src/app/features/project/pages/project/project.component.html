@@ -1,11 +1,11 @@
 <app-sidenav-toolbar-layout xmlns="http://www.w3.org/1999/html">
   <div class="center">
-    <button mat-button (click)="openEventDialog()">
+    <button mat-button (click)="openProjectDialog()">
       <mat-icon>add_box</mat-icon>
       Event erstellen
     </button>
   </div>
-  <div class="dashboard-section">
+  <div class="card-section">
     <app-project-card
       *ngFor="let project of filteredProjects"
       [project]="project"

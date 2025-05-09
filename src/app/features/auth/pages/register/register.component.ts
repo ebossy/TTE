@@ -23,8 +23,9 @@ import {UserFirestoreService} from '../../../../core/services/user-firestore.ser
 })
 export class RegisterComponent {
   private fireauth = inject(FireauthService);
-  private userStore = inject(UserFirestoreService);
+
   constructor(
+    private userFire: UserFirestoreService,
     private router:Router
 ) {}
   public email:any;
@@ -42,7 +43,7 @@ export class RegisterComponent {
     this.fireauth.signUp(this.email, this.password).subscribe({
       next: (cred) => {
         console.log('Registrierung erfolgreich:', cred);
-        this.userStore.saveUserData(cred.user, {email: this.email, name: this.name});
+        this.userFire.saveUserData(cred.user, {email: this.email, name: this.name});
         this.router.navigate(['dashboard']);
       },
       error: (err) => {

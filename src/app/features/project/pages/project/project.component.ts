@@ -62,7 +62,7 @@ export class ProjectComponent implements OnInit{
     this.router.navigate([`project/${url}`]);
   }
 
-  openEventDialog() {
+  openProjectDialog() {
     this.dialog.open(ProjectFormComponent, {
       width: '40%',
       disableClose: true

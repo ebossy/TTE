@@ -1,0 +1,23 @@
+<mat-card class="item-card">
+
+  <button class="topr-button" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="delete()">Löschen</button>
+    <button *ngIf="isAssigned" mat-menu-item (click)="unclaimTask()">Task abtreten</button>
+  </mat-menu>
+
+  <mat-card-title>{{task.title}}</mat-card-title>
+  <mat-card-subtitle>{{task.description}}</mat-card-subtitle>
+
+  <mat-card-actions>
+    <button *ngIf="!isAssigned" mat-button (click)="claimTask()"> Task beanspruchen </button>
+    <mat-checkbox *ngIf="isAssigned"
+      [checked]="task.status"
+      (change)="checkboxChanged()">
+    </mat-checkbox>
+
+
+  </mat-card-actions>
+</mat-card>

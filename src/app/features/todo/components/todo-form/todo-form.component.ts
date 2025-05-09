@@ -33,30 +33,25 @@ export class TodoFormComponent {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.todoForm.valid) {
-      let userId = "";
       // Verwende async/await, um sicherzustellen, dass die userId korrekt gesetzt wird
-      this.userFire.getCurrentUser().then(async data => {
-        userId = data.id; // userId wird hier gesetzt, nachdem getCurrentUser() abgeschlossen ist
+      const userId = await this.userFire.getCurrentUserID();
 
-        // todo attribute bündeln
-        const formValue = this.todoForm.value;
-        let newTodo = {
-          title: formValue.title,
-          description: formValue.description,
-          status: false, // Status immer false bei Erstellung
-          userId: userId,
-        };
+      // todo attribute bündeln
+      const formValue = this.todoForm.value;
+      let newTodo = {
+        title: formValue.title,
+        description: formValue.description,
+        status: false, // Status immer false bei Erstellung
+        userId: userId,
+      };
 
-        this.todoFire.addDoc(newTodo);
+      this.todoFire.addDoc(newTodo);
 
-        // Dialog schließen, nachdem das Todo hinzugefügt wurde
-        this.closeForm()
+      // Dialog schließen, nachdem das Todo hinzugefügt wurde
+      this.closeForm()
 
-      }).catch(error => {
-        console.error("Fehler beim Abrufen des Benutzers:", error);
-      });
     }
   }
   closeForm(){

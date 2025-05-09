@@ -1,3 +1,14 @@
 <app-sidenav-toolbar-layout>
- asdfa sd
+  <div class="center">
+    <button mat-button (click)="openTaskDialog()">
+      <mat-icon>add_box</mat-icon>
+      Task Hinzufügen
+    </button>
+  </div>
+  <div class="card-section">
+    <app-task-card
+      *ngFor="let task of filteredTasks"
+      [task]="task">
+    </app-task-card>
+  </div>
 </app-sidenav-toolbar-layout>

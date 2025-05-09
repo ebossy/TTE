@@ -4,6 +4,7 @@ export class Task {
   status: boolean;
   assignedToId: string;
   description: string;
+  projId: string;
 
   constructor(data: Partial<Task> = {}){
     this.id = data.id || "";
@@ -11,5 +12,6 @@ export class Task {
     this.status = data.status || false;
     this.assignedToId = data.assignedToId || "";
     this.description = data.description || "";
+    this.projId = data.projId || "";
   }
 }

@@ -10,7 +10,7 @@
     <button mat-button [class.active]="filter === 'open'" (click)="setFilter('open')">Offen</button>
     <button mat-button [class.active]="filter === 'done'" (click)="setFilter('done')">Erledigt</button>
   </div>
-  <div class="dashboard-section">
+  <div class="card-section">
     <app-todo-card
       *ngFor="let todo of filteredTodos"
       [todo]="todo">
