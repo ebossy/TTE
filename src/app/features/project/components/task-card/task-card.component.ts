@@ -8,6 +8,7 @@ import {MatCheckbox} from '@angular/material/checkbox';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {NgIf} from '@angular/common';
 import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
+import {UserFB} from '../../../auth/models/UserFB';
 
 @Component({
   selector: 'app-task-card',
@@ -31,15 +32,23 @@ import {UserFirestoreService} from '../../../../core/services/user-firestore.ser
 export class TaskCardComponent implements OnInit {
   @Input() task!: Task;
 
+  assignedUser: UserFB = new UserFB();
   isAssigned: boolean = false;
-
+  imAssigned:boolean = false;
   constructor(
     private taskFire: TaskFirestoreService,
     private userFire:UserFirestoreService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.isAssigned = !(""== this.task.assignedToId)
+    this.imAssigned = (this.userFire.getCurrentUserID() == this.task.assignedToId)
+    if (this.task.assignedToId != "") {
+      this.userFire.getUserById(this.task.assignedToId).subscribe(user => {
+        this.assignedUser = user;
+      });
+    }
   }
 
   checkboxChanged(){
@@ -51,8 +60,8 @@ export class TaskCardComponent implements OnInit {
     this.taskFire.deleteDoc(this.task)
   }
 
-  async claimTask(){
-    this.task.assignedToId = await this.userFire.getCurrentUserID();
+  claimTask(){
+    this.task.assignedToId = this.userFire.getCurrentUserID();
     this.taskFire.updateDoc(this.task)
   }
 

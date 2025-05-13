@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Benutzer E-Mail</mat-label>
+    <input matInput [(ngModel)]="usermail" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Abbrechen</button>
+  <button mat-button color="primary" (click)="inviteUser()">Einladen</button>
+</div>

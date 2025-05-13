@@ -7,6 +7,10 @@ import {MatIcon} from '@angular/material/icon';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 import {NgIf} from '@angular/common';
+import {InvitationHandlingService} from '../../../../core/invitation/services/invitation-handling.service';
+import {MatDialog} from '@angular/material/dialog';
+import {InviteDialogComponent} from '../../../../core/invitation/components/invite-dialog/invite-dialog.component';
+
 
 @Component({
   selector: 'app-event-card',
@@ -20,7 +24,7 @@ import {NgIf} from '@angular/common';
     MatMenu,
     MatMenuItem,
     MatMenuTrigger,
-    NgIf
+    NgIf,
   ],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css'
@@ -31,6 +35,7 @@ export class EventCardComponent implements OnInit {
   constructor(
     private eventFire: EventFirestoreService,
     private userFire: UserFirestoreService,
+    private dialog: MatDialog
   ) {}
 
   async ngOnInit() {
@@ -51,5 +56,16 @@ export class EventCardComponent implements OnInit {
 
   delete(){
     this.eventFire.deleteDoc(this.eventTTE);
+  }
+
+
+
+  openInviteDialog(event: EventTTE): void {
+    this.dialog.open(InviteDialogComponent, {
+      data: {
+        groupId: event.id,
+        groupType: "events"
+      }
+    });
   }
 }

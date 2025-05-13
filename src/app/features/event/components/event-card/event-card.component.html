@@ -10,6 +10,7 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="delete()">Löschen</button>
+      <button mat-menu-item (click)="openInviteDialog(eventTTE)">Einladen</button>
     </mat-menu>
   </ng-container>
   <ng-container *ngIf="!isOwner">

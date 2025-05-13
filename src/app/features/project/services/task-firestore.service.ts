@@ -30,11 +30,14 @@ export class TaskFirestoreService {
   }
 
   getProjectTasks(projId:string){
-    console.log("ng blabla",projId);
     return this.firestore.getCollectionFilter<Task>("tasks", "projectId", "==", projId)
   }
 
   addDoc(task: any){
     this.firestore.addDocument("tasks", task);
+  }
+
+  countTasksForProject(projectId:string){
+    return this.firestore.countItemsWithId("tasks", "projectId", projectId);
   }
 }

@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   User,
+  getAuth,
 } from '@angular/fire/auth';
 import {Observable, from} from 'rxjs';
 import {Router} from '@angular/router';
@@ -61,5 +62,14 @@ export class FireauthService {
         observer.next(user); // Gibt den aktuellen Benutzer oder `null` zurück
       });
     });
+  }
+
+  /**
+   * Gibt den aktuellen authentifizierten Benutzer zurück.
+   *
+   * @returns `User`-Objekt des aktuellen Benutzers oder `null`, falls keiner eingeloggt ist.
+   */
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
   }
 }

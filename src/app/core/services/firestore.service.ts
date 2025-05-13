@@ -9,7 +9,9 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-  setDoc, query, where, WhereFilterOp
+  setDoc, query, where, WhereFilterOp, getCountFromServer,
+  arrayUnion,
+  arrayRemove
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -35,6 +37,10 @@ export class FirestoreService {
     return collectionData(colRef, { idField: 'id' }) as Observable<T[]>;
   }
 
+  /**
+   * Holt alle Dokumente welche den Filter Kriterie nentsprechen
+   *
+   */
   getCollectionFilter<T>(collectionName: string, colletionField: string, filterType:WhereFilterOp, filterData:string): Observable<T[]> {
     const colRef = collection(this.firestore, collectionName);
     const q = query(colRef, where(colletionField, filterType, filterData));
@@ -48,10 +54,6 @@ export class FirestoreService {
     const docRef = doc(this.firestore, `${collectionName}/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<T>;
   }
-
-
-
-
 
 
   /**
@@ -89,10 +91,37 @@ export class FirestoreService {
   }
 
   /**
+   * Aktualisiert ein Array von einem Dokument(Hinzufügen)
+   */
+  async addToField(collectionName: string, id: string, data: any, fieldName: string) {
+    const docRef = doc(this.firestore, `${collectionName}/${id}`);
+    return await updateDoc(docRef, { [fieldName]: arrayUnion(data) });
+  }
+
+  /**
+   * Aktualisiert ein Array von einem Dokument(Löschen)
+   */
+  async removeFromField(collectionName: string, id: string, data: any, fieldName: string) {
+    const docRef = doc(this.firestore, `${collectionName}/${id}`);
+    return await updateDoc(docRef, { [fieldName]: arrayRemove(data) });
+  }
+
+  /**
    * Löscht ein Dokument aus der Sammlung
    */
   async deleteDocument(collectionName: string, id: string) {
     const docRef = doc(this.firestore, `${collectionName}/${id}`);
     return await deleteDoc(docRef);
+  }
+
+
+  /**
+   * Zählt wie viele gültige/gesuchte werte existieren
+   */
+  async countItemsWithId(collectionName:string, collectionField: string, searchedId: string): Promise<number> {
+    const xCollection = collection(this.firestore, collectionName);
+    const q = query(xCollection, where(collectionField, '==', searchedId));
+    const snapshot = await getCountFromServer(q);
+    return snapshot.data().count;
   }
 }

@@ -5,6 +5,8 @@ import {from, Observable, of, switchMap} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {UserFirestoreService} from '../../../core/services/user-firestore.service';
 import {ProjectFirestoreService} from '../services/project-firestore.service';
+import {FireauthService} from '../../auth/services/fireauth.service';
+import {User} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class ProjectAccessGuard implements CanActivate {
 
   constructor(
     private projectFire: ProjectFirestoreService,
-    private userFire: UserFirestoreService,
+    private fireauth: FireauthService,
     private router: Router
   ) {}
 
@@ -25,43 +27,47 @@ export class ProjectAccessGuard implements CanActivate {
       return of(false);
     }
 
-    return from(this.userFire.getCurrentUserID()).pipe(
-      switchMap(currentUserId => { //Benutzer id
+
+    return this.fireauth.getAuthState().pipe(
+      switchMap((user: User | null) => {
+        const currentUserId = user?.uid;
+
+        if (!currentUserId) {
+          console.error('User not logged in');
+          this.router.navigate(['/dashboard']);
+          return of(false);
+        }
 
         return this.projectFire.getDocById(projectId).pipe(
-          map(project => { //Project
-            //Falls Project nicht existiert
+          map(project => {
             if (!project) {
-              this.router.navigate(['/dashboard']);
-              return false;
-            }
-            //Falls die Id kein String ist benötigt für includes
-            if(typeof (currentUserId)!= "string"){
+              console.error('Project not found');
               this.router.navigate(['/dashboard']);
               return false;
             }
 
             const allowedUserIds = project.member || [];
-            //Benutzer ist Berechtigt
+
             if (allowedUserIds.includes(currentUserId)) {
               return true;
             }
 
-            //else fall falls nichts zutrifft
+            console.warn('User not authorized for this project');
             this.router.navigate(['/dashboard']);
             return false;
           }),
-          catchError(() => {
+          catchError(err => {
+            console.error('Error fetching project:', err);
             this.router.navigate(['/dashboard']);
             return of(false);
           })
         );
       }),
-      catchError(() => {
+      catchError(err => {
+        console.error('Error with auth state:', err);
         this.router.navigate(['/dashboard']);
         return of(false);
       })
     );
   }
 }
-

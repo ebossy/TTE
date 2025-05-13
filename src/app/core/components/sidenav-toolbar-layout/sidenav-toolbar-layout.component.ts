@@ -39,7 +39,10 @@ export class SidenavToolbarLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.userFire.getCurrentUser().then(data => {
-      this.currentUser = data;
+      if(data){
+        this.currentUser = data;
+      }
+
     });
   }
 

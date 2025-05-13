@@ -5,18 +5,21 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="delete()">Löschen</button>
-    <button *ngIf="isAssigned" mat-menu-item (click)="unclaimTask()">Task abtreten</button>
+    <button *ngIf="imAssigned" mat-menu-item (click)="unclaimTask()">Task abtreten</button>
   </mat-menu>
 
   <mat-card-title>{{task.title}}</mat-card-title>
   <mat-card-subtitle>{{task.description}}</mat-card-subtitle>
 
   <mat-card-actions>
-    <button *ngIf="!isAssigned" mat-button (click)="claimTask()"> Task beanspruchen </button>
-    <mat-checkbox *ngIf="isAssigned"
+    <mat-checkbox
       [checked]="task.status"
+      [disabled]="!imAssigned"
       (change)="checkboxChanged()">
     </mat-checkbox>
+    <button *ngIf="!isAssigned" mat-button (click)="claimTask()"> Task beanspruchen </button>
+
+    <div *ngIf="!imAssigned && isAssigned">{{assignedUser.name}} zugewiesen</div>
 
 
   </mat-card-actions>
