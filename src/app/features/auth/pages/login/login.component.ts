@@ -27,7 +27,7 @@ export class LoginComponent {
   public email:any;
   public password:any;
 
-  //TODO
+
   onLogin() {
     console.log('Login attempt:', this.email, this.password);
 
@@ -44,17 +44,30 @@ export class LoginComponent {
     });
   }
 
-  //TODO
-  onForgotPassword() {
-    console.log('Password recovery initiated');
 
-  }
-
-  test(){
-    console.log(this.fireauth.getAuthState())
-  }
 
   navigateTo(page:string){
     this.router.navigate([`/${page}`]);
+  }
+
+  /**
+   * methode prüft, ob eingegebene E-Mail gültig ist
+   */
+  async forgetPassword(){
+    const mail = this.email
+    //wenn keine email eingegeben
+    if(!mail){
+      alert("Email angeben")
+      return
+    }
+    //E-Mail zurücksetzung einleiten
+    try{
+      await this.fireauth.retrievePassword(mail)
+      alert("Email überprüfen")
+    }
+      //unerwartete Fehler
+    catch(error:any){
+      alert(error.message)
+    }
   }
 }

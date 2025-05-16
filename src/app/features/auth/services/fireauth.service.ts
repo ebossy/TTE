@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   User,
-  getAuth,
+  getAuth, sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import {Observable, from} from 'rxjs';
 import {Router} from '@angular/router';
@@ -71,5 +71,12 @@ export class FireauthService {
    */
   getCurrentUser(): User | null {
     return this.auth.currentUser;
+  }
+
+  /**
+   * Methode leitet password zurücksetzung an firebase weiter
+   */
+  retrievePassword(email: string) {
+    return sendPasswordResetEmail(this.auth, email)
   }
 }

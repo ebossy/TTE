@@ -38,6 +38,7 @@
   cursor: pointer;
   font-weight: 500;
   border-bottom: 1px solid #ccc;
+  transition: all 0.2s ease;
 }
 
 .sidenav p:last-child {
@@ -46,4 +47,18 @@
 
 .sidenav p:hover {
   color: #1976d2;              /* Hover-Effekt (Material Primary Blue) */
+}
+
+p {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+
+.sidenav p.active {
+  font-weight: bold;
+  border-bottom: 2px solid #1976d2 !important;
+  color: #1976d2 !important;
 }

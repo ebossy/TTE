@@ -1,7 +1,8 @@
 <mat-card class="item-card">
   <mat-card-title>{{ eventTTE.title }}</mat-card-title>
-  <mat-card-subtitle>{{ eventTTE.date.toDate().toLocaleString() }}</mat-card-subtitle>
-  <mat-card-footer>{{eventTTE.member.length}}</mat-card-footer>
+  <mat-card-subtitle>{{ dateString }}</mat-card-subtitle>
+  <mat-card-subtitle class="datediff"> {{dateDiff}}</mat-card-subtitle>
+  <mat-card-footer>interessierte: {{eventTTE.member.length}}</mat-card-footer>
 
   <!-- Menü nur für den Ersteller sichtbar -->
   <ng-container *ngIf="isOwner">

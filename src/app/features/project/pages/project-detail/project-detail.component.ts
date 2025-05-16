@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {
   SidenavToolbarLayoutComponent
 } from '../../../../core/components/sidenav-toolbar-layout/sidenav-toolbar-layout.component';
@@ -16,16 +16,21 @@ import {TodoCardComponent} from '../../../todo/components/todo-card/todo-card.co
 import {TaskCardComponent} from '../../components/task-card/task-card.component';
 import {Task} from '../../models/Task';
 import {TaskFirestoreService} from '../../services/task-firestore.service';
+import {MatMenuItem} from "@angular/material/menu";
+import {EventTTE} from '../../../event/models/EventTTE';
+import {InviteDialogComponent} from '../../../../core/invitation/components/invite-dialog/invite-dialog.component';
+import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [
-    SidenavToolbarLayoutComponent,
-    MatButton,
-    MatIcon,
-    NgForOf,
-    TaskCardComponent,
-  ],
+    imports: [
+        SidenavToolbarLayoutComponent,
+        MatButton,
+        MatIcon,
+        NgForOf,
+        TaskCardComponent,
+
+    ],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })
@@ -36,12 +41,14 @@ export class ProjectDetailComponent  implements OnInit {
   tasks$: Observable<Task[]> = of([]);
   filteredTasks: Task[] = [];
 
-  filter: 'all' | 'done' | 'open' = 'all';
+  filter: 'all' | 'my' | 'done' | 'open' | 'unassigned' = 'all';
 
   constructor(private route: ActivatedRoute,
               private projectFire: ProjectFirestoreService,
               private dialog: MatDialog,
               private taskFire: TaskFirestoreService,
+              private userFire: UserFirestoreService,
+              private router: Router,
               ) {}
 
   ngOnInit() {
@@ -58,6 +65,11 @@ export class ProjectDetailComponent  implements OnInit {
       }
     });
 
+    this.project.subscribe(project => {
+      if(project.member.length == 0){
+        this.projectFire.deleteDoc(project)
+      }
+    })
     this.tasks$ = this.taskFire.getProjectTasks(this.projId)
 
     this.tasks$.subscribe(tasks => {
@@ -74,8 +86,15 @@ export class ProjectDetailComponent  implements OnInit {
     });
   }
 
-  applyFilter(tasks: Task[]){
+  async applyFilter(tasks: Task[]){
+    const userId = await this.userFire.getCurrentUserID();
     switch (this.filter) {
+      case 'my':
+        this.filteredTasks = tasks.filter(t => t.assignedToId == userId);
+        break
+      case 'unassigned':
+        this.filteredTasks = tasks.filter(t => t.assignedToId == "");
+        break
       case 'done':
         this.filteredTasks = tasks.filter(t => t.status);
         break;
@@ -86,5 +105,29 @@ export class ProjectDetailComponent  implements OnInit {
       default:
         this.filteredTasks = tasks;
     }
+  }
+
+  /**
+   * funktion wird von buttons aus der html aufgerufen
+   * @param value Filter wert
+   */
+  setFilter(value: 'all' | 'my' | 'done' | 'open' | 'unassigned') {
+    this.filter = value;
+    this.tasks$.subscribe(tasks => this.applyFilter(tasks)); // Filter neu anwenden
+  }
+
+  openInviteDialog(projectId: string): void {
+    this.dialog.open(InviteDialogComponent, {
+      data: {
+        groupId: projectId,
+        groupType: "projects"
+      }
+    });
+  }
+
+  leave() {
+    const currentUser = this.userFire.getCurrentUserID()
+    this.projectFire.removeMember(this.projId, currentUser)
+    this.router.navigate(["/project"]);
   }
 }

@@ -1,0 +1,15 @@
+<ng-container *ngIf="(invitations$ | async)?.length; else noInvites">
+  <div *ngFor="let invitation of invitations$ | async" class="invitation-item">
+    <p class="invitation-text">
+      {{ invitation.groupType }}: {{ invitation.groupId }}
+    </p>
+    <div class="invitation-actions">
+      <button mat-button (click)="respond(invitation, 'accepted')">✔️</button>
+      <button mat-button (click)="respond(invitation, 'declined')">❌</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noInvites>
+  <p style="padding: 10px;">Keine Einladungen</p>
+</ng-template>

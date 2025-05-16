@@ -1,40 +1,22 @@
 <app-sidenav-toolbar-layout>
   <div class="dashboard-section">
     <h2 class="clickable" (click)="navigateTo('todo')">ToDo's</h2>
-    <mat-card class="item-card">
-      <mat-card-title>Bananen kaufen</mat-card-title>
-      <mat-card-subtitle>Aus Laden XY</mat-card-subtitle>
-      <mat-card-actions>
-        <mat-checkbox></mat-checkbox>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card class="item-card">
-      <mat-card-title>Bananen kaufen</mat-card-title>
-      <mat-card-subtitle>Aus Laden XY</mat-card-subtitle>
-      <mat-card-actions>
-        <mat-checkbox></mat-checkbox>
-      </mat-card-actions>
-    </mat-card>
+    <div class="card-section" >
+      <app-todo-card *ngFor="let todo of (todos$ | async)?.slice(0, 3)" [todo]="todo"></app-todo-card>
+    </div>
   </div>
 
   <div class="dashboard-section">
-    <h2 class="clickable" (click)="navigateTo('project')">Tasks</h2>
-    <mat-card class="item-card">
-      <mat-card-title>Datenbank Anbindung errichten</mat-card-title>
-      <mat-card-subtitle>FireBase nutzen</mat-card-subtitle>
-      <mat-card-content>ShoppingList-App</mat-card-content>
-      <mat-card-actions>
-        <mat-checkbox></mat-checkbox>
-      </mat-card-actions>
-    </mat-card>
+    <h2 class="clickable" (click)="navigateTo('project')">Projekte</h2>
+    <div class="card-section" >
+      <app-project-card *ngFor="let project of (projects$ | async)?.slice(0, 3)" [project]="project"></app-project-card>
+    </div>
   </div>
 
   <div class="dashboard-section">
     <h2 class="clickable" (click)="navigateTo('event')">Event's</h2>
-    <mat-card class="item-card">
-      <mat-card-title>Geburtstags Party</mat-card-title>
-      <mat-card-subtitle>6 Teilnehmer</mat-card-subtitle>
-      <mat-card-content>1.1.2000</mat-card-content>
-    </mat-card>
+    <div class="card-section" >
+      <app-event-card *ngFor="let eventTTE of (eventTTE$ | async)?.slice(0, 3)" [eventTTE]="eventTTE"></app-event-card>
+    </div>
   </div>
 </app-sidenav-toolbar-layout>

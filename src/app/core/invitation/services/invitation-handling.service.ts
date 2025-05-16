@@ -4,6 +4,9 @@ import {Todo} from '../../../features/todo/models/Todo';
 import {UserFirestoreService} from '../../services/user-firestore.service';
 import {Invitation} from '../models/invitation';
 import {FirestoreService} from '../../services/firestore.service';
+import {firstValueFrom} from 'rxjs';
+import {EventTTE} from '../../../features/event/models/EventTTE';
+import {Project} from '../../../features/project/models/Project';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +19,52 @@ export class InvitationHandlingService {
     private invitationFire: InvitationFireService,
   ) { }
 
-  createInvitation(groupId: string, groupType: string, userId: string) {
+  async createInvitation(groupId: string, groupType: string, userId: string) {
+
+    // Fall 1 Member bereits in Gruppe
+    const group:EventTTE|Project = await firstValueFrom(this.firestore.getDocument(groupType, groupId));
+    if (group?.member?.includes(userId)) {
+      alert("Nutzer bereits Mitglied")
+      return;
+    }
+
+    // 2. Prüfen, ob Einladung schon existiert
+    const existingInvitations = await firstValueFrom(
+      this.firestore.getCollectionFilter<Invitation>(
+        'invitations',
+        'userId',
+        '==',
+        userId
+      )
+    );
+
+    const alreadyInvited = existingInvitations.some(
+      inv => inv.groupId === groupId && inv.groupType === groupType
+    );
+
+    if (alreadyInvited) {
+      alert("Nutzer bereits Eingeladen")
+      return;
+    }
+
     const newInvitation= {
       groupId: groupId,
       groupType: groupType,
       userId: userId,
       status: "pending"
     }
+    this.firestore.getDocument(groupType,groupId)
     this.invitationFire.addDoc(newInvitation);
   }
 
-  async acceptInvitation(invitation: Invitation) {
-    // 1. Update invitation status
-    this.invitationFire.deleteDoc(invitation)
-
-    // 2. Füge den Benutzer dem Projekt hinzu
-    await this.firestore.addToField(invitation.groupType, invitation.groupId, invitation.userId, "member")
+  respond(invitation: Invitation, status: 'accepted' | 'declined'){
+    if (status === 'declined') {
+      this.invitationFire.deleteDoc(invitation)
+    }
+    else if (status === 'accepted') {
+      this.firestore.addToField(invitation.groupType, invitation.groupId, invitation.userId, "member")
+        .then(()=>{this.invitationFire.deleteDoc(invitation)})
+    }
   }
 
 }

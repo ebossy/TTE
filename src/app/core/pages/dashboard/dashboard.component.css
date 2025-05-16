@@ -11,9 +11,6 @@
   font-weight: bold;
 }
 
-.card-section {
-  padding: 16px;
-}
 
 .item-card {
   margin-top: 8px;
@@ -31,5 +28,6 @@
 }
 
 .dashboard-section{
-  margin: 8px
+  margin: 8px 8px 8px 14px;
 }
+

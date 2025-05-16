@@ -21,10 +21,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .card-section {
-  width: 100%;
+  width: 98%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3 gleich breite Spalten */
+  grid-template-columns: repeat(4, 1fr); /* 4 gleich breite Spalten */
   gap: 16px;
   padding: 16px;
 }

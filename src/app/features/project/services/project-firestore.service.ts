@@ -36,4 +36,7 @@ export class ProjectFirestoreService {
   getDocById(id:string):Observable<Project> {
     return this.firestore.getDocument<Project>("projects", id);
   }
+  removeMember(id:string, userId: string){
+    this.firestore.removeFromField("projects", id, userId, "member")
+  }
 }

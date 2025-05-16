@@ -10,7 +10,7 @@ import {NgIf} from '@angular/common';
 import {InvitationHandlingService} from '../../../../core/invitation/services/invitation-handling.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InviteDialogComponent} from '../../../../core/invitation/components/invite-dialog/invite-dialog.component';
-
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-event-card',
@@ -32,6 +32,8 @@ import {InviteDialogComponent} from '../../../../core/invitation/components/invi
 export class EventCardComponent implements OnInit {
   @Input() eventTTE!: EventTTE;
   isOwner: boolean = false;
+  dateString: string = "";
+  dateDiff: any = "";
   constructor(
     private eventFire: EventFirestoreService,
     private userFire: UserFirestoreService,
@@ -41,11 +43,26 @@ export class EventCardComponent implements OnInit {
   async ngOnInit() {
     const currentUserId = await this.userFire.getCurrentUserID();
     this.isOwner = this.eventTTE.creatorId === currentUserId;
+    this.dateString = this.eventTTE.date.toDate().toLocaleString()
+    this.dateString = this.dateString.substring(0, this.dateString.length-3)
+
+    const eventTime = this.eventTTE.date.toMillis(); // oder new Date(this.eventTTE.date)
+    const now = Timestamp.now().toMillis();
+
+    let diffMs = eventTime - now;
+
+    if (diffMs < 0) {
+      this.dateDiff = "Bereits vorbei";
+    } else {
+      const minutes = Math.floor(diffMs / (1000 * 60)) % 60;
+      const hours = Math.floor(diffMs / (1000 * 60 * 60)) % 24;
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+      this.dateDiff = `${days} Tage, ${hours} Stunden, ${minutes} Minuten übrig`;
+    }
   }
 
-  test(){
-    console.log("test")
-  }
+
 
 
   async leave() {

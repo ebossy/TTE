@@ -33,7 +33,7 @@ export class InviteDialogComponent {
     if (!this.usermail.trim()) return; //Falls leer
     const user = await this.userFire.getUserByEmail(this.usermail);
     if (!user){
-      alert("Benutzer nicht gefunden");  // Fehlermeldung an den Benutzer anzeigen
+      alert("Benutzer nicht gefunden");  // Falls kein Benutzer vorhanden
       return;
     }
     this.invitationHandler.createInvitation(this.data.groupId, this.data.groupType, user.id);

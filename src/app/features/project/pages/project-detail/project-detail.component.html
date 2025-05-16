@@ -4,6 +4,21 @@
       <mat-icon>add_box</mat-icon>
       Task Hinzufügen
     </button>
+    <button mat-button (click)="openInviteDialog(projId)">
+      <mat-icon>person_add</mat-icon>
+      Einladen
+    </button>
+    <button mat-button (click)="leave()">
+      <mat-icon>exit_to_app</mat-icon>
+      Projekt Verlassen
+    </button>
+  </div>
+  <div class="filter-buttons">
+    <button mat-button [class.active]="filter === 'all'" (click)="setFilter('all')">Alle</button>
+    <button mat-button [class.active]="filter === 'unassigned'" (click)="setFilter('unassigned')">Nicht zugewiesen</button>
+    <button mat-button [class.active]="filter === 'my'" (click)="setFilter('my')">Meine Tasks</button>
+    <button mat-button [class.active]="filter === 'open'" (click)="setFilter('open')">Nicht erledigt</button>
+    <button mat-button [class.active]="filter === 'done'" (click)="setFilter('done')">Erledigt</button>
   </div>
   <div class="card-section">
     <app-task-card
