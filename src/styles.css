@@ -28,3 +28,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   gap: 16px;
   padding: 16px;
 }
+
+.faded {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}

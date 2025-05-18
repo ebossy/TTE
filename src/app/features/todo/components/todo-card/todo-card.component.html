@@ -1,4 +1,4 @@
-<mat-card class="item-card">
+<mat-card class="item-card" [ngClass]="{ 'faded': todo.status }">
   <button mat-icon-button class="close-button" (click)="delete()">
     <mat-icon>close</mat-icon>
   </button>

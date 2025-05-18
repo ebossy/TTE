@@ -1,6 +1,6 @@
 <app-sidenav-toolbar-layout>
   <div class="dashboard-section">
-    <h2 class="clickable" (click)="navigateTo('todo')">ToDo's</h2>
+    <h2 class="clickable" (click)="navigateTo('todo')">Todos</h2>
     <div class="card-section" >
       <app-todo-card *ngFor="let todo of (todos$ | async)?.slice(0, 3)" [todo]="todo"></app-todo-card>
     </div>
@@ -9,12 +9,15 @@
   <div class="dashboard-section">
     <h2 class="clickable" (click)="navigateTo('project')">Projekte</h2>
     <div class="card-section" >
-      <app-project-card *ngFor="let project of (projects$ | async)?.slice(0, 3)" [project]="project"></app-project-card>
+      <app-project-card *ngFor="let project of (projects$ | async)?.slice(0, 3)"
+                        [project]="project"
+                        (click)="navigateToProj(project.id)">>
+      </app-project-card>
     </div>
   </div>
 
   <div class="dashboard-section">
-    <h2 class="clickable" (click)="navigateTo('event')">Event's</h2>
+    <h2 class="clickable" (click)="navigateTo('event')">Events</h2>
     <div class="card-section" >
       <app-event-card *ngFor="let eventTTE of (eventTTE$ | async)?.slice(0, 3)" [eventTTE]="eventTTE"></app-event-card>
     </div>

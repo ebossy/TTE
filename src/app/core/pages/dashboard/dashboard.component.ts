@@ -54,4 +54,8 @@ export class DashboardComponent implements OnInit{
     this.router.navigate([`/${page}`]);
   }
 
+  navigateToProj(url: string) {
+    this.router.navigate([`project/${url}`]);
+  }
+
 }

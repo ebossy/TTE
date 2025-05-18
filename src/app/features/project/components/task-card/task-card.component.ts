@@ -6,7 +6,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 import {UserFB} from '../../../auth/models/UserFB';
 
@@ -24,7 +24,8 @@ import {UserFB} from '../../../auth/models/UserFB';
     MatMenuItem,
     MatMenuTrigger,
     NgIf,
-    MatButton
+    MatButton,
+    NgClass
   ],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'

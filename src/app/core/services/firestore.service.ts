@@ -41,9 +41,9 @@ export class FirestoreService {
    * Holt alle Dokumente welche den Filter Kriterie nentsprechen
    *
    */
-  getCollectionFilter<T>(collectionName: string, colletionField: string, filterType:WhereFilterOp, filterData:string): Observable<T[]> {
+  getCollectionFilter<T>(collectionName: string, collectionField: string, filterType:WhereFilterOp, filterData:string, orderByField?: string,): Observable<T[]> {
     const colRef = collection(this.firestore, collectionName);
-    const q = query(colRef, where(colletionField, filterType, filterData));
+    const q = query(colRef, where(collectionField, filterType, filterData));
     return collectionData(q, { idField: 'id' }) as Observable<T[]>;
   }
 

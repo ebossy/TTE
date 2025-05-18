@@ -6,6 +6,7 @@ import {Todo} from '../../models/Todo';
 import {TodoFirestoreService} from '../../services/todo-firestore.service';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-todo-card',
@@ -17,7 +18,8 @@ import {MatIconButton} from '@angular/material/button';
     MatCheckbox,
     FormsModule,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    NgClass
   ],
   templateUrl: './todo-card.component.html',
   styleUrl: './todo-card.component.css'

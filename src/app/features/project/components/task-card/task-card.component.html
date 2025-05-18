@@ -1,4 +1,4 @@
-<mat-card class="item-card">
+<mat-card class="item-card" [ngClass]="{ 'faded': task.status }">
 
   <button class="topr-button" mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
