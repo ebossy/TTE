@@ -64,7 +64,9 @@ export class SidenavToolbarLayoutComponent implements OnInit {
   navigateTo(page:string){
     this.router.navigate([`/${page}`]);
   }
+
   signOut(){
+    this.navigateTo(`/login`)
     this.fireauth.signOut()
   }
 }
