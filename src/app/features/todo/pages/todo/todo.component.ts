@@ -31,7 +31,7 @@ import {Observable, of} from 'rxjs';
 export class TodoComponent implements OnInit{
   todos$: Observable<Todo[]> = of([]);
 
-  //Array welches angezeit wird
+  //Array welches angezeigt wird
   filteredTodos: Todo[] = [];
 
   filter: 'all' | 'done' | 'open' = 'all';

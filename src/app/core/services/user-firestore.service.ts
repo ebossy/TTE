@@ -1,10 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {FirestoreService} from './firestore.service';
-
 import {getDoc} from '@angular/fire/firestore';
 import {FireauthService} from '../../features/auth/services/fireauth.service';
 import {UserFB} from '../../features/auth/models/UserFB';
-import {firstValueFrom, map, take} from 'rxjs';
+import {firstValueFrom, take} from 'rxjs';
 import {User} from '@angular/fire/auth';
 
 
@@ -23,6 +22,9 @@ export class UserFirestoreService {
     this.firestore.addDocumentWithId("users", user.uid, data)
   }
 
+  /**
+   * nimmt den ganzen User aus der DB
+   */
   async getCurrentUser() {
     const user = this.fireauth.getCurrentUser()
     if (user) {
@@ -35,9 +37,11 @@ export class UserFirestoreService {
       }
     }
     return null;
-
   }
 
+  /**
+   * nimmt nur die id mittels auth
+   */
   getCurrentUserID(): any {
     return this.fireauth.getCurrentUser()?.uid
   }

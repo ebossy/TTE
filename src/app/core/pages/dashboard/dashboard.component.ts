@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MatCard, MatCardActions, MatCardContent, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
-import {MatCheckbox} from '@angular/material/checkbox';
 import {Router} from '@angular/router';
 
 import {SidenavToolbarLayoutComponent} from '../../components/sidenav-toolbar-layout/sidenav-toolbar-layout.component';
@@ -54,6 +52,7 @@ export class DashboardComponent implements OnInit{
     this.router.navigate([`/${page}`]);
   }
 
+  //unterscheidet sich durch den präfix
   navigateToProj(url: string) {
     this.router.navigate([`project/${url}`]);
   }

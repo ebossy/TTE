@@ -3,7 +3,6 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
-import {ActivatedRoute} from '@angular/router';
 import {TaskFirestoreService} from '../../services/task-firestore.service';
 
 @Component({

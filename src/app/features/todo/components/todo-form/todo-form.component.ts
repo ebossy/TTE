@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {Todo} from '../../models/Todo';
 import {MatButton} from '@angular/material/button';
 import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 import {TodoFirestoreService} from '../../services/todo-firestore.service';

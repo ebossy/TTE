@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   User,
-  getAuth, sendPasswordResetEmail,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import {Observable, from} from 'rxjs';
 import {Router} from '@angular/router';

@@ -11,7 +11,6 @@ import {UserFirestoreService} from '../../../../core/services/user-firestore.ser
 import {Project} from '../../models/Project';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
-import {EventFormComponent} from '../../../event/components/event-form/event-form.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ProjectFormComponent} from '../../components/project-form/project-form.component';
 
@@ -49,12 +48,12 @@ export class ProjectComponent implements OnInit{
     this.project$ = await this.projectFire.getUserProjects();
 
     this.project$.subscribe(project => {
-      this.appyFilter(project);
+      this.applyFilter(project);
     })
   }
 
-  //Noch kein FIlter nötig
-  async appyFilter(project: Project[]) {
+  //Falls Zukünftig ein Filter benötigt wird
+  async applyFilter(project: Project[]) {
     this.filteredProjects = project;
   }
 

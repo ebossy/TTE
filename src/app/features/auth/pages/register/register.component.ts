@@ -36,7 +36,7 @@ export class RegisterComponent {
     this.router.navigate([`/${page}`]);
   }
 
-  //TODO User DB ergänzen
+
   async onRegister() {
     console.log('Login attempt:', this.email, this.password, this.name);
 

@@ -3,7 +3,6 @@ import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import {from, Observable, of, switchMap} from 'rxjs';
 
 import { map, catchError } from 'rxjs/operators';
-import {UserFirestoreService} from '../../../core/services/user-firestore.service';
 import {ProjectFirestoreService} from '../services/project-firestore.service';
 import {FireauthService} from '../../auth/services/fireauth.service';
 import {User} from '@angular/fire/auth';

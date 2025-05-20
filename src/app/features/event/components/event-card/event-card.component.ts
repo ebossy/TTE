@@ -1,13 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventTTE} from '../../models/EventTTE';
 import {EventFirestoreService} from '../../services/event-firestore.service';
-import {MatCard, MatCardActions, MatCardFooter, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardFooter, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
 import {MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {UserFirestoreService} from '../../../../core/services/user-firestore.service';
 import {NgIf} from '@angular/common';
-import {InvitationHandlingService} from '../../../../core/invitation/services/invitation-handling.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InviteDialogComponent} from '../../../../core/invitation/components/invite-dialog/invite-dialog.component';
 import { Timestamp } from 'firebase/firestore';
@@ -46,11 +45,12 @@ export class EventCardComponent implements OnInit {
     this.dateString = this.eventTTE.date.toDate().toLocaleString()
     this.dateString = this.dateString.substring(0, this.dateString.length-3)
 
-    const eventTime = this.eventTTE.date.toMillis(); // oder new Date(this.eventTTE.date)
+    const eventTime = this.eventTTE.date.toMillis();
     const now = Timestamp.now().toMillis();
 
     let diffMs = eventTime - now;
 
+    //umwandeln, was ausgegeben wird
     if (diffMs < 0) {
       this.dateDiff = "Bereits vorbei";
     } else {

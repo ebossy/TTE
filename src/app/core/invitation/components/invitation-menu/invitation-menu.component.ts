@@ -1,12 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Invitation} from '../../models/invitation';
-import {UserFirestoreService} from '../../../services/user-firestore.service';
 import {InvitationFireService} from '../../services/invitation-fire.service';
-import {FirestoreService} from '../../../services/firestore.service';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {InvitationHandlingService} from '../../services/invitation-handling.service';
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
+import {MatIcon} from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-invitation-menu',
@@ -14,7 +15,12 @@ import {InvitationHandlingService} from '../../services/invitation-handling.serv
     NgIf,
     NgForOf,
     AsyncPipe,
-    MatButton
+    MatButton,
+    MatIcon,
+    MatIconButton,
+    MatMenu,
+    MatMenuTrigger,
+
   ],
   templateUrl: './invitation-menu.component.html',
   styleUrl: './invitation-menu.component.css'

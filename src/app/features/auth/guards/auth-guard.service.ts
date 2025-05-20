@@ -9,7 +9,7 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router';
-import { map, Observable, of, switchMap, take, tap} from 'rxjs';
+import { map, take, tap} from 'rxjs';
 
 
 @Injectable({

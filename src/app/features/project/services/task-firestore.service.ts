@@ -3,7 +3,6 @@ import {Task} from '../models/Task';
 import {Observable} from 'rxjs';
 import {FirestoreService} from '../../../core/services/firestore.service';
 import {UserFirestoreService} from '../../../core/services/user-firestore.service';
-import {Project} from '../models/Project';
 
 @Injectable({
   providedIn: 'root'

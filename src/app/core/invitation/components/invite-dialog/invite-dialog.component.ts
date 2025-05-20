@@ -22,6 +22,7 @@ import {InvitationHandlingService} from '../../services/invitation-handling.serv
 })
 export class InviteDialogComponent {
   usermail: string = '';
+  message: string = '';
   constructor(
     public dialogRef: MatDialogRef<InviteDialogComponent>,
     private invitationHandler: InvitationHandlingService,
@@ -36,7 +37,7 @@ export class InviteDialogComponent {
       alert("Benutzer nicht gefunden");  // Falls kein Benutzer vorhanden
       return;
     }
-    this.invitationHandler.createInvitation(this.data.groupId, this.data.groupType, user.id);
+    this.invitationHandler.createInvitation(this.data.groupId, this.data.groupType, user.id, this.message);
     this.dialogRef.close();
   }
 }

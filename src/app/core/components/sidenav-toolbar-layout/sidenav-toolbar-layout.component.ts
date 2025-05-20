@@ -5,12 +5,11 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/mater
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {UserFB} from '../../../features/auth/models/UserFB';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {FireauthService} from '../../../features/auth/services/fireauth.service';
 import {UserFirestoreService} from '../../services/user-firestore.service';
 import {InvitationMenuComponent} from '../../invitation/components/invitation-menu/invitation-menu.component';
-import {filter} from 'rxjs';
-import {NgClass} from '@angular/common';
+
 
 @Component({
   selector: 'app-sidenav-toolbar-layout',

@@ -6,18 +6,14 @@
   <button mat-button [matMenuTriggerFor]="userMenu">
     {{ currentUser.name }}
   </button>
-  <!-- Einladungssymbol -->
-  <button mat-icon-button [matMenuTriggerFor]="invitationMenu">
-    <mat-icon>mail</mat-icon>
-  </button>
 
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item (click)="signOut()">Abmelden</button>
   </mat-menu>
 
-  <mat-menu #invitationMenu="matMenu">
-    <app-invitation-menu></app-invitation-menu>
-  </mat-menu>
+
+  <app-invitation-menu></app-invitation-menu>
+
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
@@ -30,6 +26,6 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <ng-content></ng-content> <!-- HIER kommt dein Page-Content rein -->
+    <ng-content></ng-content> <!-- HIER kommt der Page-Content rein -->
   </mat-sidenav-content>
 </mat-sidenav-container>

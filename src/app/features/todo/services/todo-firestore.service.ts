@@ -1,5 +1,4 @@
 import {inject, Injectable} from '@angular/core';
-import {FireauthService} from '../../auth/services/fireauth.service';
 import {FirestoreService} from '../../../core/services/firestore.service';
 import {Todo} from '../models/Todo';
 import {UserFirestoreService} from '../../../core/services/user-firestore.service';

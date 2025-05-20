@@ -1,8 +1,14 @@
-<div mat-dialog-content>
+<div mat-dialog-content class="flex-1">
+  <div class="flex-1">
   <mat-form-field appearance="fill">
     <mat-label>Benutzer E-Mail</mat-label>
     <input matInput [(ngModel)]="usermail" />
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Nachricht</mat-label>
+    <input matInput [(ngModel)]="message" />
+  </mat-form-field>
+  </div>
 </div>
 
 <div mat-dialog-actions align="end">

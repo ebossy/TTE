@@ -1,7 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {InvitationFireService} from './invitation-fire.service';
-import {Todo} from '../../../features/todo/models/Todo';
-import {UserFirestoreService} from '../../services/user-firestore.service';
 import {Invitation} from '../models/invitation';
 import {FirestoreService} from '../../services/firestore.service';
 import {firstValueFrom} from 'rxjs';
@@ -19,7 +17,7 @@ export class InvitationHandlingService {
     private invitationFire: InvitationFireService,
   ) { }
 
-  async createInvitation(groupId: string, groupType: string, userId: string) {
+  async createInvitation(groupId: string, groupType: string, userId: string, message: string) {
 
     // Fall 1 Member bereits in Gruppe
     const group:EventTTE|Project = await firstValueFrom(this.firestore.getDocument(groupType, groupId));
@@ -51,17 +49,17 @@ export class InvitationHandlingService {
       groupId: groupId,
       groupType: groupType,
       userId: userId,
-      status: "pending"
+      message: message,
     }
     this.firestore.getDocument(groupType,groupId)
     this.invitationFire.addDoc(newInvitation);
   }
 
   respond(invitation: Invitation, status: 'accepted' | 'declined'){
-    if (status === 'declined') {
+    if (status === 'declined') {//Declined steht für den Button ❌ aus dem invitations Menü
       this.invitationFire.deleteDoc(invitation)
     }
-    else if (status === 'accepted') {
+    else if (status === 'accepted') {//Declined steht für den Button ✔️ aus dem invitations Menü
       this.firestore.addToField(invitation.groupType, invitation.groupId, invitation.userId, "member")
         .then(()=>{this.invitationFire.deleteDoc(invitation)})
     }

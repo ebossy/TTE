@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 import {FireauthService} from '../../services/fireauth.service';
-import {take} from 'rxjs';
 
 @Component({
   selector: 'app-login',

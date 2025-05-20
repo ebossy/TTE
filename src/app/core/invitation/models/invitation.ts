@@ -4,7 +4,7 @@ export class Invitation{
   groupId: string;
   groupType: string;
   userId: string;
-  status: 'pending' | 'accepted' | 'declined';
+  message: string;
 
 
   constructor(data: Partial<Invitation> = {}){
@@ -12,6 +12,7 @@ export class Invitation{
     this.groupId = data.groupId || "";
     this.groupType = data.groupType || "";
     this.userId = data.userId || "";
-    this.status = data.status || "pending";
+    this.message = data.message || "";
+
   }
 }

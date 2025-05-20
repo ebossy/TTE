@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {FirestoreService} from '../../services/firestore.service';
 import {UserFirestoreService} from '../../services/user-firestore.service';
 import {Invitation} from '../models/invitation';
-import {Todo} from '../../../features/todo/models/Todo';
 
 @Injectable({
   providedIn: 'root'
