@@ -49,7 +49,7 @@ export class ProjectDetailComponent  implements OnInit {
 
   ngOnInit() {
 
-
+    //Projekt daten aus der url beziehen
     this.route.paramMap.subscribe(params => {
       let projektId:string | null;
       projektId = params.get('id');
@@ -61,11 +61,13 @@ export class ProjectDetailComponent  implements OnInit {
       }
     });
 
+    //Projekt wird gelöscht, wenn er keine member mehr hat
     this.project.subscribe(project => {
       if(project.member.length == 0){
         this.projectFire.deleteDoc(project)
       }
     })
+
     this.tasks$ = this.taskFire.getProjectTasks(this.projId)
 
     this.tasks$.subscribe(tasks => {

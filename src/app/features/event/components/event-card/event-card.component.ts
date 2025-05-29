@@ -45,6 +45,7 @@ export class EventCardComponent implements OnInit {
     this.dateString = this.eventTTE.date.toDate().toLocaleString()
     this.dateString = this.dateString.substring(0, this.dateString.length-3)
 
+    //Zeiten um die differenz zu berechnen
     const eventTime = this.eventTTE.date.toMillis();
     const now = Timestamp.now().toMillis();
 

@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit{
     this.router.navigate([`/${page}`]);
   }
 
-  //unterscheidet sich durch den präfix
+  //unterscheidet sich durch den präfix von navigateTo
   navigateToProj(url: string) {
     this.router.navigate([`project/${url}`]);
   }

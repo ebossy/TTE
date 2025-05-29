@@ -14,13 +14,4 @@ import {Project} from '../../models/Project';
 })
 export class ProjectCardComponent {
   @Input() project!: Project;
-
-
-
-  constructor(
-  ) {
-
-  }
-
-
 }

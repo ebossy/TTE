@@ -36,7 +36,9 @@ export class RegisterComponent {
     this.router.navigate([`/${page}`]);
   }
 
-
+  /**
+   * speichert einen Eintrag in der Users collection bei erfolgreicher Registrierung
+   */
   async onRegister() {
     console.log('Login attempt:', this.email, this.password, this.name);
 

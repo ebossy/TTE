@@ -52,7 +52,7 @@ export class ProjectComponent implements OnInit{
     })
   }
 
-  //Falls Zukünftig ein Filter benötigt wird
+
   async applyFilter(project: Project[]) {
     this.filteredProjects = project;
   }

@@ -25,7 +25,7 @@ export const routes: Routes = [
   {path: "todo", component: TodoComponent, canActivate: [AuthGuardService]},
   {path: "event", component: EventComponent, canActivate: [AuthGuardService]},
   {path: "project", component: ProjectComponent, canActivate: [AuthGuardService],},
-  {path:"project/:id", component: ProjectDetailComponent, canActivate: [ProjectAccessGuard]}, //Anderen Guard machen
+  {path:"project/:id", component: ProjectDetailComponent, canActivate: [ProjectAccessGuard]},
 
   {path: '**',
     redirectTo: 'dashboard',

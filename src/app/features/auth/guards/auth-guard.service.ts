@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     return this.authService.getAuthState().pipe(
-      take(1), // Wir wollen nur den ersten Wert abwarten
+      take(1), // ersten wert abwarten
       map(user => !!user), // Falls ein User vorhanden ist, wird true zurückgegeben
       tap(isAuthenticated => {
         if (!isAuthenticated) {

@@ -37,7 +37,7 @@ export class TodoFormComponent {
       // Verwende async/await, um sicherzustellen, dass die userId korrekt gesetzt wird
       const userId = await this.userFire.getCurrentUserID();
 
-      // todo attribute bündeln
+      // attribute bündeln
       const formValue = this.todoForm.value;
       let newTodo = {
         title: formValue.title,

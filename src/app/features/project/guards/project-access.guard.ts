@@ -19,6 +19,9 @@ export class ProjectAccessGuard implements CanActivate {
     private router: Router
   ) {}
 
+  /**
+   * Methode prüft, ob ein User für ein Projekt berechtigt ist
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const projectId = route.paramMap.get('id');
 
@@ -27,6 +30,7 @@ export class ProjectAccessGuard implements CanActivate {
     }
 
 
+    //Auf den aktuellen nutzer Zugreifen
     return this.fireauth.getAuthState().pipe(
       switchMap((user: User | null) => {
         const currentUserId = user?.uid;
@@ -37,6 +41,7 @@ export class ProjectAccessGuard implements CanActivate {
           return of(false);
         }
 
+        //auf das Projekt zugreifen
         return this.projectFire.getDocById(projectId).pipe(
           map(project => {
             if (!project) {
@@ -45,8 +50,8 @@ export class ProjectAccessGuard implements CanActivate {
               return false;
             }
 
+            //Einziger erfolgsfall
             const allowedUserIds = project.member || [];
-
             if (allowedUserIds.includes(currentUserId)) {
               return true;
             }

@@ -15,15 +15,13 @@ export class UserFirestoreService {
   private firestore = inject(FirestoreService);
 
 
-  /**
-   * Speichert Benutzerdaten in der Firestore-Datenbank unter der Sammlung 'users'
-   */
+
   saveUserData(user: User, data:any){
     this.firestore.addDocumentWithId("users", user.uid, data)
   }
 
   /**
-   * nimmt den ganzen User aus der DB
+   * nimmt den User aus der User collection nicht aus auth
    */
   async getCurrentUser() {
     const user = this.fireauth.getCurrentUser()
